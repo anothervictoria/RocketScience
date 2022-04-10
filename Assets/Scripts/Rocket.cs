@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Rocket : MonoBehaviour
     AudioSource audioSource;
     [SerializeField] float rotationSpeed = 100f;
     [SerializeField] float flySpeed = 100f;
+    enum State {Playing, Dead, NextLevel};
 
     // Start is called before the first frame update
     void Start()
@@ -61,11 +63,15 @@ public class Rocket : MonoBehaviour
             case "Friendly":
                 Debug.Log("ok");
                 break;
+            case "Finish":
+                SceneManager.LoadScene("SceneTwo");
+                break;
             case "Powerup":
                 Debug.Log("Energy on");
                 break;
             default:
                 Debug.Log("Rocket BOOOM!");
+                SceneManager.LoadScene("SceneOne");
                 break;
         }
     }
