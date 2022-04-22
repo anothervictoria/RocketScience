@@ -9,20 +9,32 @@ public class Rocket : MonoBehaviour
     AudioSource audioSource;
     [SerializeField] float rotationSpeed = 100f;
     [SerializeField] float flySpeed = 100f;
+    [SerializeField] AudioClip flyingSound;
+    [SerializeField] AudioClip finishSound;
+    [SerializeField] AudioClip deadSound;
+    [SerializeField] ParticleSystem deathParticle;
+    [SerializeField] ParticleSystem flyParticle;
+    [SerializeField] ParticleSystem finishParticle;
+
     enum State {Playing, Dead, NextLevel};
+    State state = State.Playing;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        state = State.Playing;
     }
 
     // Update is called once per frame
     void Update()
     {
-        RocketLaunch();
-        RocketRotation();
+        if(state != State.Dead)
+        {
+            RocketLaunch();
+            RocketRotation();
+        }        
     }
     private void RocketLaunch()
     {
@@ -31,12 +43,16 @@ public class Rocket : MonoBehaviour
             rigidBody.AddRelativeForce(Vector3.up * flySpeed);
             if (!audioSource.isPlaying)
             {
+                audioSource.clip = flyingSound;
                 audioSource.Play();
+                flyParticle.Play();
+                //audioSource.PlayOneShot(flyingSound);
             }
         }
-        else
+        else if(Input.GetKeyUp(KeyCode.Space))
         {
             audioSource.Pause();
+            flyParticle.Stop();
         }
     }
 
@@ -58,21 +74,55 @@ public class Rocket : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (state != State.Playing)
+        {
+            return;
+        }
+
         switch (collision.gameObject.tag)
         {
-            case "Friendly":
-                Debug.Log("ok");
+            case "Friendly":                
                 break;
             case "Finish":
-                SceneManager.LoadScene("SceneTwo");
+                Finish();
+                Invoke("LoadNextLevel", 2f);                
                 break;
             case "Powerup":
                 Debug.Log("Energy on");
                 break;
             default:
-                Debug.Log("Rocket BOOOM!");
-                SceneManager.LoadScene("SceneOne");
+                DestroyRocket();
                 break;
         }
+    }
+    void DestroyRocket()
+    {
+        Debug.Log("Rocket BOOOM!");
+        state = State.Dead;
+        audioSource.Stop();
+        audioSource.PlayOneShot(deadSound);
+        deathParticle.Play();
+        Invoke("LoadFirstLevel", 2f);
+    }
+
+    void Finish()
+    {
+        state = State.NextLevel;
+        audioSource.Stop();
+        audioSource.clip = finishSound;
+        audioSource.Play();
+        finishParticle.Play();
+        Debug.Log(finishSound.name);
+        Invoke("LoadNextLevel", 2f);
+    }
+
+    void LoadNextLevel() //Finish
+    {
+        SceneManager.LoadScene("LevelTwo");
+    }
+
+    void LoadFirstLevel() //GameOver
+    {
+        SceneManager.LoadScene("LevelOne");
     }
 }
