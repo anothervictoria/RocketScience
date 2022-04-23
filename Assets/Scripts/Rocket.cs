@@ -40,7 +40,7 @@ public class Rocket : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up * flySpeed);
+            rigidBody.AddRelativeForce(Vector3.up * flySpeed * Time.deltaTime);
             if (!audioSource.isPlaying)
             {
                 audioSource.clip = flyingSound;
@@ -118,7 +118,13 @@ public class Rocket : MonoBehaviour
 
     void LoadNextLevel() //Finish
     {
-        SceneManager.LoadScene("LevelTwo");
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     void LoadFirstLevel() //GameOver

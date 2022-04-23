@@ -1176,38 +1176,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: ShapeModule.m_Scale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: ShapeModule.m_Scale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: ShapeModule.m_Scale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 146989491589157702, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 4815228104929228008, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1255,18 +1223,6 @@ PrefabInstance:
     - target: {fileID: 4815228104929228011, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
       propertyPath: m_Name
       value: Rocket
-      objectReference: {fileID: 0}
-    - target: {fileID: 8881451063095999872, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8881451063095999872, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 8881451063095999875, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}
-      propertyPath: lengthInSec
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd91ac74729a74af7934a8e9347d99fc, type: 3}

@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd54e5bc52c543deb4eeb6fd264d6d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
-  flySpeed: 35
+  rotationSpeed: 150
+  flySpeed: 2000
   flyingSound: {fileID: 8300000, guid: 22381403f0deb4008961ce515ec16024, type: 3}
   finishSound: {fileID: 8300000, guid: 7f88c2428f2b64b999c506a45256549f, type: 3}
   deadSound: {fileID: 8300000, guid: dc985fd68b4b246b9b1a1c2cb12d2396, type: 3}
@@ -578,11 +578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6192724089161036652, guid: 947bc5563e7624427be44bc6d1c64342, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6192724089161036652, guid: 947bc5563e7624427be44bc6d1c64342, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.18
+      value: -1.62
       objectReference: {fileID: 0}
     - target: {fileID: 6192724089161036652, guid: 947bc5563e7624427be44bc6d1c64342, type: 3}
       propertyPath: m_LocalPosition.z
@@ -622,7 +622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6192724089161036655, guid: 947bc5563e7624427be44bc6d1c64342, type: 3}
       propertyPath: lengthInSec
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6192724089161036655, guid: 947bc5563e7624427be44bc6d1c64342, type: 3}
       propertyPath: playOnAwake
@@ -668,8 +668,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 4815228104929228008}
     m_Modifications:
     - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581684704584792591, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7774923565600882379, guid: 46f0849c6a98a4d96a5204115a0ad2c3, type: 3}
       propertyPath: m_RootOrder
