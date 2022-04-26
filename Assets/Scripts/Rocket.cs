@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -15,6 +14,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem deathParticle;
     [SerializeField] ParticleSystem flyParticle;
     [SerializeField] ParticleSystem finishParticle;
+    SceneChanger sceneChanger;
 
     enum State {Playing, Dead, NextLevel};
     State state = State.Playing;
@@ -22,6 +22,7 @@ public class Rocket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sceneChanger = FindObjectOfType<SceneChanger>();
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         state = State.Playing;
@@ -84,8 +85,7 @@ public class Rocket : MonoBehaviour
             case "Friendly":                
                 break;
             case "Finish":
-                Finish();
-                Invoke("LoadNextLevel", 2f);                
+                Finish();                
                 break;
             case "Powerup":
                 Debug.Log("Energy on");
@@ -102,7 +102,7 @@ public class Rocket : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(deadSound);
         deathParticle.Play();
-        Invoke("LoadFirstLevel", 2f);
+        StartCoroutine(FirstScene());
     }
 
     void Finish()
@@ -113,22 +113,18 @@ public class Rocket : MonoBehaviour
         audioSource.Play();
         finishParticle.Play();
         Debug.Log(finishSound.name);
-        Invoke("LoadNextLevel", 2f);
+        StartCoroutine(NextScene());
     }
 
-    void LoadNextLevel() //Finish
+    IEnumerator NextScene()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-        if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
-        {
-            nextSceneIndex = 0;
-        }
-        SceneManager.LoadScene(nextSceneIndex);
+        yield return new WaitForSeconds(2);
+        sceneChanger.LoadNextLevel();
     }
 
-    void LoadFirstLevel() //GameOver
+    IEnumerator FirstScene()
     {
-        SceneManager.LoadScene("LevelOne");
+        yield return new WaitForSeconds(2);
+        sceneChanger.LoadFirstLevel();
     }
 }
