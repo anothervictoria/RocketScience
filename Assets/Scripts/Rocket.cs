@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Rocket : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class Rocket : MonoBehaviour
     [SerializeField] AudioClip deadSound;
     [SerializeField] ParticleSystem deathParticle;
     [SerializeField] ParticleSystem flyParticle;
-    [SerializeField] ParticleSystem finishParticle;
+    [SerializeField] ParticleSystem finishParticle;    
     SceneChanger sceneChanger;
+    
+    //private Camera mainCamera;
 
     enum State {Playing, Dead, NextLevel};
     State state = State.Playing;
@@ -25,17 +28,19 @@ public class Rocket : MonoBehaviour
         sceneChanger = FindObjectOfType<SceneChanger>();
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        state = State.Playing;
+        state = State.Playing;        
     }
+
+    
 
     // Update is called once per frame
     void Update()
     {
-        if(state != State.Dead)
+        if (state != State.Dead)
         {
             RocketLaunch();
             RocketRotation();
-        }        
+        }
     }
     private void RocketLaunch()
     {
@@ -46,11 +51,10 @@ public class Rocket : MonoBehaviour
             {
                 audioSource.clip = flyingSound;
                 audioSource.Play();
-                flyParticle.Play();
-                //audioSource.PlayOneShot(flyingSound);
+                flyParticle.Play();                
             }
         }
-        else if(Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.Space))
         {
             audioSource.Pause();
             flyParticle.Stop();
@@ -58,18 +62,23 @@ public class Rocket : MonoBehaviour
     }
 
     private void RocketRotation()
-    {
-        rigidBody.freezeRotation = true;
-        float speed = rotationSpeed * Time.deltaTime;
-        
+    {      
+
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.forward * speed);
+            ApplyRotation(-rotationSpeed);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(-Vector3.forward * speed);
+            ApplyRotation(rotationSpeed);
         }
+        rigidBody.freezeRotation = false;
+    }
+
+    void ApplyRotation(float rotationValue)
+    {
+        rigidBody.freezeRotation = true;
+        transform.Rotate(-Vector3.forward * rotationValue * Time.deltaTime);
         rigidBody.freezeRotation = false;
     }
 
@@ -82,10 +91,10 @@ public class Rocket : MonoBehaviour
 
         switch (collision.gameObject.tag)
         {
-            case "Friendly":                
+            case "Friendly":
                 break;
             case "Finish":
-                Finish();                
+                Finish();
                 break;
             case "Powerup":
                 Debug.Log("Energy on");
@@ -95,6 +104,7 @@ public class Rocket : MonoBehaviour
                 break;
         }
     }
+
     void DestroyRocket()
     {
         Debug.Log("Rocket BOOOM!");
