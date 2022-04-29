@@ -41,6 +41,10 @@ public class Rocket : MonoBehaviour
             RocketLaunch();
             RocketRotation();
         }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            StartCoroutine(NextScene());
+        }
     }
     private void RocketLaunch()
     {
